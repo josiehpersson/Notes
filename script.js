@@ -51,19 +51,22 @@ window.onload = () => {
 }
 //FUNKAR
 
+let deleteNote = () => {
+console.log('inne i deletenote');
+}
 //SKAPA NOTE NÄR MAN TRYCKER PÅ KNAPPEN
 submitBtn.onclick=()=> {
     addNote();
 }
 //FUNKARa
 
+const listOfNotes = document.querySelector('notes-list');
 //ONCLICK FÖR DELETEBTN
 notesList.onclick = (e) => {
     if(e.target.className === 'delete-note-btn') {
         console.log('delete-btn-clicked');
-    } else {
-        return;
-    }
+        deleteNote();
+    } else return;
 }
 //FUNKAR
 
