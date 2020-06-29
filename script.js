@@ -61,7 +61,7 @@ let addNote = () => {
 window.onload = () => {
   let savedNotes = localStorage.getItem('list');
   if(savedNotes === undefined || null || '') {
-    notesList.innerHTML += ''
+    notesList.innerHTML += 'empty';
   } else {
   notesList.innerHTML += savedNotes;
 };
