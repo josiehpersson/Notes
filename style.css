@@ -52,7 +52,7 @@ body {
 }
 
 .new-note-container {
-  width: 100%;
+  width: inherit;
   height: 20%;
   display: flex;
   flex-flow: row nowrap;
@@ -61,8 +61,8 @@ body {
 }
 
 .new-note {
-  width: 80%;
-  max-width: 900px;
+  min-width: 80%;
+  max-width: 100%;
   border: 1px solid #FFA800;
   box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
@@ -71,7 +71,8 @@ body {
 }
 
 .new-note-submit-btn {
-  width: 18%;
+  min-width: 10%;
+  max-width: 18%;
   max-height: 50px;
   padding: 1% 0 1% 0;
   border: none;
@@ -82,7 +83,8 @@ body {
 }
 .delete-note-btn {
   display: inline-flex;
-  width: 4%;
+  max-width: 4%;
+  max-height: 4%;
   font-size: 150%;
   border: none;
   color: white;
@@ -96,32 +98,28 @@ body {
 
 .notes-list {
   margin: 5% 0 0 4%;
-  width: 100%;
+  width: inherit;
+  box-sizing: border-box;
+  display: flex;
+  flex-flow: column-reverse;
 }
 
 .note {
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow:row nowrap;
   justify-content: space-between;
   align-items: center;
+  text-align: left;
   list-style: none;
-  font-size: 150%;
-  width: 90%;
+  font-size: 100%;
+  width: inherit;
+  height: auto;
+  margin: 2% 0 2% 0;
 }
-
-.note:before {
-  display: inline-flex;
-  font-family: 'Font awesome 5 free';
-  font-weight: 900;
-  font-size: 150%;
-  content: '\f004';
-  color: #FF00C0;
-  margin-right: 5%;
-  width: 5%;
+.time-stamp {
+  font-size: 75%;
+  margin: 0 5% 0 0;
 }
-
-
-
 .notebook-footer {
   width: 100%;
   height: 10%;

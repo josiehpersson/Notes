@@ -4,69 +4,78 @@ const notesList = document.getElementById('notes-list');
 const note = document.getElementsByClassName('note');
 const clearBtn = document.getElementById('clear-notes-btn');
 
-//SKAPA ETT LISTITEM
+let createNewDate = () => {
+  let currentDate = new Date();
+  let date = currentDate.getDate();
+  let month = currentDate.getMonth();
+  month = month + 1;
+  let year = currentDate.getFullYear();
+  let dateString = `${pad(date)}/${pad(month)}/${year}`;
+  return dateString;
+};
+
+let pad = (number) => {
+  return number < 10 ? '0' + number : number;
+};
+
+let createTimeStamp = () => {
+  let currentDate = new Date();
+  let hour = currentDate.getHours();
+  let minute = currentDate.getMinutes();
+  let timeString = `${pad(hour)}:${pad(minute)}`;
+  return timeString;
+};
+
 let createNote = (note) => {
-    let listItem = document.createElement('li');
-    let deleteBtn = document.createElement('button');
-    let noteLabel = document.createElement('label');
-    listItem.className='note';
-    listItem.id ='note';
-    deleteBtn.innerText='X';
-    deleteBtn.className='delete-note-btn';
-    noteLabel.innerText = note; 
-    listItem.appendChild(noteLabel);
-    listItem.appendChild(deleteBtn);
-    return listItem;
-}
-//FUNKAR
+  let listItem = document.createElement('li');
+  let deleteBtn = document.createElement('button');
+  let noteLabel = document.createElement('label');
+  let timeStamp = document.createElement('p');
+  let date = createNewDate();
+  let time = createTimeStamp();
+  timeStamp.innerHTML = `${date} ${time}`;
+  timeStamp.className = 'time-stamp';
+  listItem.className = 'note';
+  listItem.id = 'note';
+  deleteBtn.innerText = 'X';
+  deleteBtn.className = 'delete-note-btn';
+  noteLabel.innerText = note;
+  listItem.appendChild(timeStamp);
+  listItem.appendChild(noteLabel);
+  listItem.appendChild(deleteBtn);
+  return listItem;
+};
 
-//SPARA NOTES I LOCALSTORAGE
 let saveNote = () => {
-    let notes = notesList.innerHTML;
-    localStorage.setItem('list', notes)
-}
-//FUNKAR
+  let notes = notesList.innerHTML;
+  localStorage.setItem('list', notes);
+};
 
-//LÄGG TILL LISTITEM I UL
 let addNote = () => {
-    let listItem = createNote(newNote.value);
-    notesList.appendChild(listItem);
-    saveNote();
-    newNote.value="";
-}
-//FUNKAR
+  let listItem = createNote(newNote.value);
+  notesList.appendChild(listItem);
+  saveNote();
+  newNote.value = '';
+};
 
-let removeNote = (e) => {
-console.log('inne i remove')
-let listItem = e.target;
-listItem.parentNode.removeChild(listItem);
-localStorage.removeItem('list',deleted);
-}
-
-
-//LADDA LISTA NÄR MAN ÖPPNAR WEBBLÄSAREN
 window.onload = () => {
-    let savedNotes = localStorage.getItem('list');
-    notesList.innerHTML += savedNotes;
-}
-//FUNKAR
+  let savedNotes = localStorage.getItem('list');
+  notesList.innerHTML += savedNotes;
+};
 
-let deleteNote = () => {
-console.log('inne i deletenote');
-}
-//SKAPA NOTE NÄR MAN TRYCKER PÅ KNAPPEN
-submitBtn.onclick=()=> {
-    addNote();
-}
-//FUNKARa
+submitBtn.onclick = () => {
+  addNote();
+};
 
-const listOfNotes = document.querySelector('notes-list');
-//ONCLICK FÖR DELETEBTN
 notesList.onclick = (e) => {
-    if(e.target.className === 'delete-note-btn') {
-        console.log('delete-btn-clicked');
-        deleteNote();
-    } else return;
-}
-//FUNKAR
+  if (e.target.className === 'delete-note-btn') {
+    let removeThis = e.target.parentNode;
+    deleteNote(removeThis);
+  } else return;
+};
 
+let deleteNote = (removenote) => {
+  notesList.removeChild(removenote);
+  localStorage.removeItem(removenote);
+  saveNote();
+};
