@@ -60,9 +60,11 @@ let addNote = () => {
 
 window.onload = () => {
   let savedNotes = localStorage.getItem('list');
-  if(savedNotes !== undefined || null || '') {
+  if(localStorage.list !== undefined || null || '') {
     notesList.innerHTML += savedNotes;
-  } else return;
+  } else {
+    notesList.innerHTML += 'No notes avaliable';
+  }
 };
 
 submitBtn.onclick = () => {
